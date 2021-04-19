@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     // Send http request button.
     private Button requestUrlButton = null;
     // TextView to display server returned page html text.
-    private TextView responseTextView = null;
+    private WebView responseTextView = null;
     // This handler used to listen to child thread show return page html text message and display those text in responseTextView.
     private Handler uiUpdater = null;
     @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(responseTextView == null)
         {
-            responseTextView = (TextView) findViewById(R.id.http_url_response_text_view);
+            responseTextView = (WebView) findViewById(R.id.http_url_response_text_view);
         }
         // This handler is used to wait for child thread message to update server response text in TextView.
         if(uiUpdater == null)
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         if(bundle != null)
                         {
                             String responseText = bundle.getString(KEY_RESPONSE_TEXT);
-                            responseTextView.setText(responseText);
+                            responseTextView.loadDataWithBaseURL(null, responseText, "text/html", "utf-8", null);
                         }
                     }
                 }
